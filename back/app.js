@@ -10,9 +10,11 @@ var machineRoter = require('./routes/machine');
 
 var app = express();
 
+/*
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+*/
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -30,7 +32,7 @@ app.use(function(req, res, next) {
 });
 
 app.use(function(req,res,next){
-  console.log("läuft")
+    args = req.url.split(',');
 })
 
 console.log("test")
