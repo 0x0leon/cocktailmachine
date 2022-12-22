@@ -1,9 +1,10 @@
+
+
 #include <Arduino.h>
-#include <AccelStepper.h>
 
 int dir = 23;
 int step = 22;
-int speed = 250;
+int speed = 170;
 
 void setup()
 {
@@ -14,13 +15,21 @@ void setup()
 
 void accelerate()
 {
-	for (int i = 1200; i > speed; i--)
+
+	int x = speed;
+	for (int i = 1000; i >= speed; i--)
 	{
 		digitalWrite(step, HIGH);
 		delayMicroseconds(i);
 		digitalWrite(step, LOW);
 		delayMicroseconds(i);
 	}
+}
+
+void oneStep(){
+	digitalWrite(step, HIGH);
+	delayMicroseconds(speed);
+	digitalWrite(step, HIGH);
 }
 
 
