@@ -98,7 +98,14 @@ void test()
 void loop()
 {
 
+
+	if(Serial.available() > 0){
+		String command = Serial.readString();
+		Serial.println(command);
+	}
+
 	//test();
+	//fill_ml(100);
 
 }
 

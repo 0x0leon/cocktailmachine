@@ -1,15 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
-import { Navbar } from 'react-bootstrap';
+import { Container, Navbar } from 'react-bootstrap';
 import { NavbarMenu } from './components/Navbar';
-import Data from './components/Data';
+import Data from './components/CocktailData';
 import { Outlet } from 'react-router-dom';
+import NavigationBar from './components/NavigationBar';
 
 function App() {
 	return (
 		<div className="App">
-			<h1>Startseite</h1>
-			<Outlet/>
+			<NavigationBar />
+			<Outlet />
 		</div>
 	);
 }

@@ -7,7 +7,8 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Data from './components/Data';
+import CocktailData from './components/CocktailData';
+import Dashboard from './components/Dashboard';
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/dashboard',
-        element: <Data /> 
+        element: <Dashboard />
+      },
+      {
+        path: '/cocktails',
+        element: <CocktailData /> 
       }
     ]
   }
