@@ -32,6 +32,7 @@ void oneStep()
 
 void makeSteps(int steps)
 {
+
 	for (int i = 0; i < steps; i++)
 	{
 		oneStep();
@@ -102,8 +103,17 @@ void loop()
 	if(Serial.available() > 0){
 		String command = Serial.readString();
 		Serial.println(command);
+		if(command.equals("on")){
+			accelerate();
+			makeSteps(8600);
+			Serial.write("ended\n");
+		} else if(command.equals("off")){
+			digitalWrite(step, LOW);
+		}
 	}
 
+	Serial.write("message from arduino\n");
+	delay(1000);
 	//test();
 	//fill_ml(100);
 

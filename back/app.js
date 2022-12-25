@@ -6,6 +6,12 @@ var logger = require('morgan');
 
 var app = express();
 
+
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var machineRoter = require('./routes/machine');
+
+
 // Add headers before the routes are defined
 app.use(function (req, res, next) {
 
@@ -25,12 +31,6 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var machineRoter = require('./routes/machine');
-
-
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -70,7 +70,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.send('error');
 });
 
 module.exports = app;

@@ -2,15 +2,32 @@ var express = require('express');
 var cors = require('cors')
 var router = express.Router();
 
-var serial = require('serialport')
+var { SerialPort, ReadlineParser } = require('serialport');
+
+const serialport = new SerialPort({ path: 'COM3', baudRate: 9600 })
+const parser = serialport.pipe(new ReadlineParser({ delimiter: '\n' }))
+
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
     res.send('index');
+    next();
 });
 
-router.post('/dashboard', cors(), function (req, res, next) {
-    console.log(req.body.mode);
+
+parser.on('data', function (data) {
+    console.log('Data Arduino:', data);
+    if (data == "ended") {
+        mode = "end"
+    }
+})
+
+
+
+router.post('/dashboard', cors(), async function (req, res, next) {
+    console.log(req.body);
+    serialport.write(req.body['mode'])
+    res.sendStatus(200).end()
 });
 
 
