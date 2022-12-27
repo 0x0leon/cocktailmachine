@@ -2,10 +2,7 @@ var express = require('express');
 var cors = require('cors')
 var router = express.Router();
 
-var { SerialPort, ReadlineParser } = require('serialport');
 
-const serialport = new SerialPort({ path: 'COM3', baudRate: 9600 })
-const parser = serialport.pipe(new ReadlineParser({ delimiter: '\n' }))
 
 
 /* GET users listing. */
@@ -15,13 +12,9 @@ router.get('/', function (req, res, next) {
 });
 
 
-parser.on('data', function (data) {
-    console.log('Data Arduino:', data);
-    if (data == "ended") {
-        mode = "end"
-    }
-})
-
+//_______________________________________________________________
+//  https://www.youtube.com/watch?v=gQYsUjT-IBo
+//_______________________________________________________________
 
 
 router.post('/dashboard', cors(), async function (req, res, next) {
