@@ -1,14 +1,21 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect } from 'react'
 import { Button, Col, Container, Row, Stack } from 'react-bootstrap'
-
+import io from 'socket.io-client'
 export default class Dashboard extends Component {
 
-    constructor(){
+    constructor() {
         super()
 
         this.state = {
-            clicks : 0
+            coms: [],
+            clicks: 0
         }
+    }
+
+    componentDidMount() {
+        io.on('data', function (data) {
+            this.setState(prev => ({ coms: prev.coms.push(data) }))
+        })
     }
 
 
@@ -21,13 +28,12 @@ export default class Dashboard extends Component {
             headers: {
                 'Content-type': 'application/json'
             },
-            body: JSON.stringify({mode : param})
+            body: JSON.stringify({ mode: param })
         })
-        .then((response) => response.json())
-        .then((result) => {
-            console.log(result)
-        })
-
+            .then((response) => response.json())
+            .then((result) => {
+                console.log(result)
+            })
     }
 
 
@@ -39,7 +45,7 @@ export default class Dashboard extends Component {
                     <Button onClick={() => this.sendParam('on')} name='motoron' data-state="on" variant='danger' size='lg'>Motor an</Button>
                     <h1>count: {this.state.clicks}</h1>
                 </Stack>
-                
+
             </Container>
         )
     }

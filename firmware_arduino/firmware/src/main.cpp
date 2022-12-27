@@ -52,7 +52,6 @@ void fill_ml(int ml)
 		{
 			oneStep();
 		}
-		
 	}
 }
 
@@ -69,7 +68,6 @@ void pull_ml(int ml)
 		{
 			oneStep();
 		}
-		
 	}
 }
 
@@ -99,24 +97,26 @@ void test()
 void loop()
 {
 
-
-	if(Serial.available() > 0){
+	if (Serial.available() > 0)
+	{
 		String command = Serial.readString();
 		Serial.println(command);
-		if(command.equals("on")){
+		if (command.equals("on"))
+		{
 			accelerate();
 			makeSteps(8600);
 			Serial.write("ended\n");
-		} else if(command.equals("off")){
+		}
+		else if (command.equals("off"))
+		{
 			digitalWrite(step, LOW);
 		}
 	}
 
 	Serial.write("message from arduino\n");
 	delay(1000);
-	//test();
-	//fill_ml(100);
-
+	// test();
+	// fill_ml(100);
 }
 
 /*

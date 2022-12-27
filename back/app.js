@@ -12,6 +12,11 @@ var usersRouter = require('./routes/users');
 var machineRoter = require('./routes/machine');
 
 
+var { SerialPort, ReadlineParser } = require('serialport');
+
+const serialport = new SerialPort({ path: 'COM3', baudRate: 9600 })
+const parser = serialport.pipe(new ReadlineParser({ delimiter: '\n' }))
+
 // Add headers before the routes are defined
 app.use(function (req, res, next) {
 
@@ -52,6 +57,24 @@ app.use(function(req,res,next){
     args = req.url.split(',');
 })
 
+
+
+//_____________________________________________________________________________
+
+
+const http = require('http').Server(app)
+const io = require('socket.io')(http)
+
+io.on('connection', function(socket) {
+    console.log('Node is listening to port');
+});
+
+parser.on('data', function(data) {
+    console.log('Received data from port: ' + data);
+    io.emit('data', data);
+});
+
+//_____________________________________________________________________________
 
 
 /*
