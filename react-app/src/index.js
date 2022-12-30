@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import CocktailData from './components/CocktailData';
 import Dashboard from './components/Dashboard';
+import Home from './components/Home';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <div>error occured</div>,
     children: [
+      {
+        path: '/',
+        element: <Home />
+      },
       {
         path: '/dashboard',
         element: <Dashboard />

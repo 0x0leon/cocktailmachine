@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 export default class NavigationBar extends Component {
     render() {
         return (
-            <Navbar bg="danger" variant="light">
+            <Navbar bg="dark" variant="dark">
                 <Container>
                     <Navbar.Brand href="/">TEST</Navbar.Brand>
                     <Nav className="me-auto">

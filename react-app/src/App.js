@@ -1,10 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
-import { Container, Navbar } from 'react-bootstrap';
-import { NavbarMenu } from './components/Navbar';
-import Data from './components/CocktailData';
-import { Outlet } from 'react-router-dom';
+
+import { Outlet, redirect, useNavigate } from 'react-router-dom';
 import NavigationBar from './components/NavigationBar';
+import { useEffect } from 'react';
 
 function App() {
 	return (

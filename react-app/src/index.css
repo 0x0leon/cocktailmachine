@@ -5,6 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* hide scrollbar for chrome, safari and opera */
+
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 
 code {
