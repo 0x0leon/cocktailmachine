@@ -1,7 +1,6 @@
 import React, { Component, useEffect } from 'react'
 import { Alert, Button, Card, CardGroup, Col, Container, Row, Stack } from 'react-bootstrap'
 import { io } from "socket.io-client";
-import { VictoryArea, VictoryChart, VictoryPolarAxis, VictoryPie, VictoryBar, VictoryTheme, VictoryAxis } from "victory";
 
 
 export default class Dashboard extends Component {
@@ -75,37 +74,11 @@ export default class Dashboard extends Component {
                 <CardGroup className='m-5'>
                     <Card>
                         <Card.Title>Motoren</Card.Title>
-                        <VictoryChart
-                            theme={VictoryTheme.material}
-                        >
-                            <VictoryAxis
-                                // tickValues specifies both the number of ticks and whesre
-                                // they are placed on the axis
-                                tickValues={[1, 2, 3, 4, 5]}
-                                tickFormat={["motor 1", "motor 2", "motor 3", "motor 4", "motor 5"]}
-                            />
-                            <VictoryAxis
-                                dependentAxis
-                                // tickFormat specifies how ticks should be displayed
-                            
-                            />
-                            <VictoryBar
-                                data={this.data}
-                                theme={VictoryTheme.material}
-                                x="motormotor"
-                                y="status"
-                            />
-                        </VictoryChart>
+                        Bottlechart
                     </Card>
                     <Card>
                         <Card.Title>Flaschen</Card.Title>
-                        <VictoryChart
-                            theme={VictoryTheme.material}
-                        >
-                            <VictoryArea data={this.data} />
-                            <VictoryAxis />
-                        </VictoryChart>
-
+                        Bottlechart
                     </Card>
                 </CardGroup>
 
