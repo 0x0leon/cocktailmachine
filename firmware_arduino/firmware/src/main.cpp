@@ -1,20 +1,27 @@
 #include <Arduino.h>
 
+int ml100 = 8600;
+int ml200 = ml100 * 2;
+
 int dir = 23;
 int step = 22;
+int enable = 2;
+
 int speed = 200;
+int preRun = 1500;
 
 void setup()
 {
 	Serial.begin(9600);
 	pinMode(dir, OUTPUT);
 	pinMode(step, OUTPUT);
+	pinMode(enable, OUTPUT);
 	Serial.println("lauft");
 }
 void accelerate()
 {
 
-	for (int i = 1000; i >= speed; i--)
+	for (int i = preRun; i >= speed; i--)
 	{
 		digitalWrite(step, HIGH);
 		delayMicroseconds(i);
@@ -42,61 +49,56 @@ void makeSteps(int steps)
 void fill_ml(int ml)
 {
 	digitalWrite(dir, LOW);
-	int ml100 = 8600;
+	
 
 	accelerate();
 
 	for (int i = 0; i < ml; i++)
 	{
-		for (int x = 0; x < ml100; x++)
-		{
-			oneStep();
-		}
+		makeSteps(ml100);
 	}
 }
 
 void pull_ml(int ml)
 {
 	digitalWrite(dir, HIGH);
-	int ml100 = 8600;
 
 	accelerate();
 
 	for (int i = 0; i < ml; i++)
 	{
-		for (int x = 0; x < ml100; x++)
-		{
-			oneStep();
-		}
+		makeSteps(ml100);
 	}
 }
 
 void test()
 {
-	int s = 8800;
-	delay(2000);
-	// put your main code here, to run repeatedly:
-	digitalWrite(dir, LOW);
-	accelerate();
-	// 122
-	// makeSteps(10000);
-
-	makeSteps(s);
-	delay(2000);
-
-	// put your main code here, to run repeatedly:
-	digitalWrite(dir, HIGH);
-	accelerate();
 	// 122
 	// makeSteps(10000);
 	// 100 - 8600
-	makeSteps(s);
+
+
+	delay(2000);
+
+	// change direction
+	digitalWrite(dir, LOW);
+
+	accelerate();
+
+	makeSteps(ml200);
+	delay(2000);
+
+	// change direction
+	digitalWrite(dir, HIGH);
+
+	accelerate();
+
+	makeSteps(ml100);
 	delay(2000);
 }
 
-void loop()
+void processSerial()
 {
-
 	if (Serial.available() > 0)
 	{
 		String command = Serial.readString();
@@ -112,27 +114,30 @@ void loop()
 			digitalWrite(step, LOW);
 		}
 	}
-
-	Serial.write("message from arduino\n");
-	delay(1000);
-	// test();
-	// fill_ml(100);
 }
 
-/*
-#include <Arduino.h>
-#include <AccelStepper.h>
-
-
-
-AccelStepper stepper = AccelStepper(AccelStepper::DRIVER, 22, 23 );
-
-void setup(){
-
+void preLoop()
+{
+	// enable board
+	digitalWrite(enable, LOW);
 }
 
 
-void loop(){
+void loop()
+{
+	preLoop();
 
+	while (true)
+	{
+
+		digitalWrite(enable, LOW);
+
+		accelerate();
+		makeSteps(ml200);
+
+		digitalWrite(enable, HIGH);
+		delay(3000);
+		
+	}
+	
 }
-*/
