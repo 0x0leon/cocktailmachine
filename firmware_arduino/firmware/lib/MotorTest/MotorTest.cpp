@@ -6,8 +6,8 @@
 void ParallelTest()
 {
 
-    int preSpeed = 1500;
-    int speed = 200;
+    int preSpeed = 2000;
+    int speed = 170;
 
     int testSet[][4] = {
         {22, 1, 2000, 0},

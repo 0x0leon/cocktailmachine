@@ -27,7 +27,7 @@ void setup()
 	pinMode(dir3, OUTPUT);
 	pinMode(dir4, OUTPUT);
 
-	
+
 	pinMode(step, OUTPUT);
 	pinMode(step2, OUTPUT);
 	pinMode(step3, OUTPUT);
@@ -38,6 +38,8 @@ void setup()
 
 	digitalWrite(dir, LOW);
 	digitalWrite(dir2, LOW);
+	digitalWrite(dir3, LOW);
+	digitalWrite(dir4, LOW);
 }
 
 

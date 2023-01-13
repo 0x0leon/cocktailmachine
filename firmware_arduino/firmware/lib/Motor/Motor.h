@@ -5,10 +5,13 @@
 class Motor
 {
 private:
-    /* data */
+    int step, dir, speed;
 public:
-    Motor(/* args */);
+    Motor(int step, int dir);
     ~Motor();
+
+    void setSpeed(int speed);
+    int getSpeed();
 };
 
 #endif
