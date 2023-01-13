@@ -1,143 +1,64 @@
 #include <Arduino.h>
+#include "MotorTest.h"
 
 int ml100 = 8600;
 int ml200 = ml100 * 2;
 
 int dir = 23;
-int step = 22;
+int dir2 = 25;
+int dir3 = 27;
+int dir4 = 29;
+
+int step = 22;	
+int step2 = 24;
+int step3 = 26;
+int step4 = 28;
+
 int enable = 2;
 
-int speed = 200;
-int preRun = 1500;
+// int speed = 200;
+// int preRun = 1500;
 
 void setup()
 {
 	Serial.begin(9600);
 	pinMode(dir, OUTPUT);
-	pinMode(step, OUTPUT);
-	pinMode(enable, OUTPUT);
-	Serial.println("lauft");
-}
-void accelerate()
-{
+	pinMode(dir2, OUTPUT);
+	pinMode(dir3, OUTPUT);
+	pinMode(dir4, OUTPUT);
 
-	for (int i = preRun; i >= speed; i--)
-	{
-		digitalWrite(step, HIGH);
-		delayMicroseconds(i);
-		digitalWrite(step, LOW);
-		delayMicroseconds(i);
-	}
-}
-void oneStep()
-{
-	digitalWrite(step, HIGH);
-	delayMicroseconds(speed);
-	digitalWrite(step, LOW);
-	delayMicroseconds(speed);
-}
-
-void makeSteps(int steps)
-{
-
-	for (int i = 0; i < steps; i++)
-	{
-		oneStep();
-	}
-}
-
-void fill_ml(int ml)
-{
-	digitalWrite(dir, LOW);
 	
+	pinMode(step, OUTPUT);
+	pinMode(step2, OUTPUT);
+	pinMode(step3, OUTPUT);
+	pinMode(step4, OUTPUT);
 
-	accelerate();
+	pinMode(enable, OUTPUT);
+	pinMode(13, OUTPUT);
 
-	for (int i = 0; i < ml; i++)
-	{
-		makeSteps(ml100);
-	}
-}
-
-void pull_ml(int ml)
-{
-	digitalWrite(dir, HIGH);
-
-	accelerate();
-
-	for (int i = 0; i < ml; i++)
-	{
-		makeSteps(ml100);
-	}
-}
-
-void test()
-{
-	// 122
-	// makeSteps(10000);
-	// 100 - 8600
-
-
-	delay(2000);
-
-	// change direction
 	digitalWrite(dir, LOW);
-
-	accelerate();
-
-	makeSteps(ml200);
-	delay(2000);
-
-	// change direction
-	digitalWrite(dir, HIGH);
-
-	accelerate();
-
-	makeSteps(ml100);
-	delay(2000);
+	digitalWrite(dir2, LOW);
 }
 
-void processSerial()
-{
-	if (Serial.available() > 0)
-	{
-		String command = Serial.readString();
-		Serial.println(command);
-		if (command.equals("on"))
-		{
-			accelerate();
-			makeSteps(8600);
-			Serial.write("ended\n");
-		}
-		else if (command.equals("off"))
-		{
-			digitalWrite(step, LOW);
-		}
-	}
-}
-
-void preLoop()
-{
-	// enable board
-	digitalWrite(enable, LOW);
-}
 
 
 void loop()
 {
-	preLoop();
 
-	while (true)
-	{
+	ParallelTest();
+	// preLoop();
 
-		digitalWrite(enable, LOW);
+	// while (true)
+	// {
 
-		accelerate();
-		makeSteps(ml200);
+	// 	digitalWrite(enable, LOW);
 
-		digitalWrite(enable, HIGH);
-		delay(3000);
+	// 	accelerate();
+	// 	makeSteps(ml200);
+
+	// 	digitalWrite(enable, HIGH);
+	// 	delay(3000);
 		
-	}
+	// }
 	
 }

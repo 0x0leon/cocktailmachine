@@ -5,5 +5,6 @@
 void setup();
 void step();
 void multiple_steps(int steps);
-void parallelRun(int motors[12][3], int speed);
+void parallelAccelerate(int motors[][4], int pre, int speed);
+void parallelRun(int motors[][4], int speed);
 #endif 
