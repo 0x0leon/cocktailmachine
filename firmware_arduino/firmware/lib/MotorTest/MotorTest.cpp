@@ -5,9 +5,14 @@
 // {pin, on/off, steps, processedSteps}
 void ParallelTest()
 {
+    // mit rausziehen   479
+    // ohne rausziehen  558
 
-    int preSpeed = 800;
-    int speed = 200;
+    // 548, 549
+    int preSpeed = 700;
+    int speed = 170;
+
+    // anfahren 530 + 10000 = 10530 
     int schritte = 10000;
 
     int testSet[][4] = {
