@@ -1,16 +1,10 @@
 #include <Arduino.h>
-#include "Motor.h"
+
 #include "MotorController.h"
 
 MotorController::MotorController()
 {
-    int st, di = 22;
-    for (int i = 0; i < maxMotors; i++)
-    {
-        di = st + 1;
-        motoren[i] = Motor(st, di);
-        st += 2;
-    }
+
 
     this->count = 0;
 }
@@ -24,7 +18,7 @@ void MotorController::parallelRun()
     int maxSteps = 0;
     for (int i = 0; i < maxMotors; i++)
     {
-        int s = motoren[i].getSteps();
+        int s = motoren[i];
         if (s > maxSteps)
         {
             maxSteps = s;
@@ -48,12 +42,12 @@ void MotorController::parallelRun()
     {
         for (int i = 0; i < maxMotors; i++)
         {   
-            int s = motoren[i].getSpeed();
-            int d = motoren[i].getSteps();
+            int s = motoren[i];
+            int d = motoren[i];
 
             if (count % s == 0 && i < d)
             {
-                digitalWrite(this->motoren[i].getStep(), HIGH);
+                digitalWrite(this->motoren[i], HIGH);
             }
         }
 
@@ -62,12 +56,12 @@ void MotorController::parallelRun()
 
         for (int i = 0; i < maxMotors; i++)
         {
-            int s = motoren[i].getSpeed();
-            int d = motoren[i].getSteps();
+            int s = motoren[i];
+            int d = motoren[i];
 
             if (count % s == 0 && i < d)
             {
-                digitalWrite(this->motoren[i].getStep(), LOW);
+                digitalWrite(this->motoren[i], LOW);
             }
         }
 

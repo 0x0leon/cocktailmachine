@@ -46,9 +46,18 @@ void setup()
 
 void loop()
 {
+	digitalWrite(dir, LOW);
+	digitalWrite(dir2, LOW);
+	digitalWrite(dir3, LOW);
+	digitalWrite(dir4, LOW);
 
 	ParallelTest();
+	delay(2000);
 	// preLoop();
+	digitalWrite(dir, HIGH);
+	digitalWrite(dir2, HIGH);
+	digitalWrite(dir3, HIGH);
+	digitalWrite(dir4, HIGH);
 
 	// while (true)
 	// {

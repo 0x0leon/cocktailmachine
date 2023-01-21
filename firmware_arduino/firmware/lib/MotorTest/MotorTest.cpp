@@ -1,13 +1,14 @@
 #include <Arduino.h>
 #include "MotorTest.h"
-#include "motorcontroller.h"
+
 
 // {pin, on/off, steps, processedSteps}
 void ParallelTest()
 {
 
-    int preSpeed = 2000;
-    int speed = 170;
+    int preSpeed = 800;
+    int speed = 200;
+    int schritte = 10000;
 
     int testSet[][4] = {
         {22, 1, 2000, 0},
@@ -32,8 +33,8 @@ void ParallelTest()
         // delay(3000);
         delayMicroseconds(i);
     }
-
-    while (true)
+    int i = 0;
+    while (i < schritte)
     {
 
         digitalWrite(testSet[0][0], HIGH);
@@ -48,5 +49,7 @@ void ParallelTest()
         digitalWrite(testSet[3][0], LOW);
         // delay(3000);
         delayMicroseconds(speed);
+
+        i++;
     }
 }
