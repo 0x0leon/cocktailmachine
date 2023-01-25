@@ -59,6 +59,8 @@ void MotorController::parallelRun()
         */
         switch (x_mode)
         {
+        
+        // case signal High
         case 1:
             for (auto i = 0; i < maxMotors; i++)
             {
@@ -74,6 +76,8 @@ void MotorController::parallelRun()
             }
             x_mode = 2;
             break;
+
+        // case signal LOW 
         case 2:
             for (auto i = 0; i < maxMotors; i++)
             {
@@ -86,21 +90,15 @@ void MotorController::parallelRun()
             }
             x_mode = 1;
             break;
+
+        default:
+            Serial.println(x_mode);
+            break;
         }
 
         delayMicroseconds(1);
         timer++;
-
-        // digital write low
     }
-
-    // loop motoren
-    // digitalWrite(i, HIGH);
-
-    // delayMicroseconds
-
-    // loop motoren
-    // digitalWrite(i, LOW);
 }
 
 /********************************************************************

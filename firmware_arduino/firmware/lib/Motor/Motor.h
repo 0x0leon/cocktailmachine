@@ -15,7 +15,7 @@ public:
 
     void setID(int id);
     int getID();
-
+    
     void setDirPin(int dirPin);
     int getDirPin();
 
