@@ -1,18 +1,21 @@
 #ifndef MOTORCONTROLLER_H_
 #define MOTORCONTROLLER_H_
 
+#include "Motor.h"
 #define maxMotors 12
 
 class MotorController
 {
 private:
-    int motoren[maxMotors];
-    int count;
+    Motor motoren[maxMotors];
 public:
     MotorController(/* args */);
     ~MotorController();
 
+    
     void parallelRun();
+
+    void printMotors();
 };
 
 

@@ -1,30 +1,49 @@
 #include <Arduino.h>
+#include "Motor.h"
 
 #include "MotorController.h"
 
+/********************************************************************
+*
+********************************************************************/
 MotorController::MotorController()
 {
 
+   int dirPin = 23;
+   int stepPin = 22;
 
-    this->count = 0;
+   for (auto i = 0; i < maxMotors; i++)
+   {
+    motoren[i] = new Motor(i+1, dirPin, stepPin);
+
+    dirPin += 2;
+    stepPin += 2;
+   }
+   
 }
 
+/********************************************************************
+*
+********************************************************************/
 MotorController::~MotorController()
 {
 }
 
+/********************************************************************
+*
+********************************************************************/
 void MotorController::parallelRun()
 {
-    int maxSteps = 0;
-    for (int i = 0; i < maxMotors; i++)
+    int maxStepsTodo = 0;
+    for (auto i = 0; i < maxMotors; i++)
     {
-        int s = motoren[i];
-        if (s > maxSteps)
-        {
-            maxSteps = s;
+        int temp = motoren[i].getStepsToDo();
+        if(temp > maxStepsTodo){
+            maxStepsTodo = temp; 
         }
     }
-
+    
+    
     /*
     motor   speed
     m1      -----   (120)
@@ -41,7 +60,7 @@ void MotorController::parallelRun()
     for (int i = 0; i < maxSteps; i++)
     {
         for (int i = 0; i < maxMotors; i++)
-        {   
+        {
             int s = motoren[i];
             int d = motoren[i];
 
@@ -80,120 +99,27 @@ void MotorController::parallelRun()
 }
 
 
-
-/*
-#include "Motor.h"
-#include <Arduino.h>
-void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(115200);
-}
+/********************************************************************
+*
+********************************************************************/
+void MotorController::printMotors(){
 
 
-
-
-
-void parallelRun(Motor motoren[12])
-{
-  int maxMotors = 12;
-  int maxSteps = 0;
-  for (int i = 0; i < maxMotors; i++)
-  {
-    int s = motoren[i].getSteps();
-    if (s > maxSteps)
+    Serial.println("<--- Motoren --->");
+    for (auto i = 0; i < maxMotors; i++)
     {
-      maxSteps = s;
+        Serial.print("Motor ID: ");
+        Serial.print(this->motoren[i].getID(););
+
+        Serial.print(" Direction Pin: ");
+        Serial.print(this->motoren[i].getDirPin());
+
+        Serial.print(" Step Pin: ");
+        Serial.print(this->motoren[i].getStepPin());
+
+        Serial.print(" Break between steps: ");
+        Serial.println(this->motoren[i].getStepBreak());
     }
-  }
-
-  
-    motor   speed
-    m1      -----   (120)
-    m2      ------  (140)
-    m3      --      (50)
-    m4      ------- (150)
-    .
-    .
-
-
-
-  bool stat = true;
-  int count = 0;
-  int lock[12] = {
-      0,0,0,0,0,0,0,0,0,0,0,0
-  };
-  for (int i = 0; i < maxSteps; i++)
-  {
-    Serial.println(count);
-    for (int j = 0; j < maxMotors; j++)
-    {
-      if (lock[j] == 0) {
-        int s = motoren[j].getSpeed();
-        int d = motoren[j].getSteps();
-
-        if (count % s == 0 && i < d)
-        {
-          //digitalWrite(motoren[i].getStep(), HIGH);
-          Serial.print("motor an: ");
-          Serial.println(j);
-          lock[j] = 1;
-
-        }
-      }
-    }
-
-    delayMicroseconds(10);
-
-
-    for (int j = 0; j < maxMotors; j++)
-    {
-      if (lock[j] == 1) {
-
-
-        int s = motoren[j].getSpeed() - 1;
-        int d = motoren[j].getSteps();
-
-        if (count % s == 0 && i < d)
-        {
-          //digitalWrite(motoren[i].getStep(), LOW);
-          Serial.print("motor auus: ");
-          Serial.println(j);
-          lock[j] = 0;
-        }
-      }
-    }
-
-  }
-
-  // loop motoren
-  // digitalWrite(i, HIGH);
-
-  // delayMicroseconds
-
-  // loop motoren
-  // digitalWrite(i, LOW);
+    Serial.println("<--------------->");
+    
 }
-Motor motoren[12] = {
-  Motor(2000, 150),
-  Motor(2000, 10),
-  Motor(2000, 120),
-  Motor(2000, 110),
-  Motor(2000, 170),
-  Motor(2000, 20),
-  Motor(2000, 350),
-  Motor(2000, 450),
-  Motor(2000, 150),
-  Motor(2000, 150),
-  Motor(2000, 150),
-  Motor(2000, 150)
-};
-void loop() {
-  // put your main code here, to run repeatedly:
-
-
-  parallelRun(motoren);
-
-  delay(5000);
-}
-
-*/

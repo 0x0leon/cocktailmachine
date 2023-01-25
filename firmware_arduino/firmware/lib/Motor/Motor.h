@@ -2,22 +2,34 @@
 #define MOTOR_H_
 
 
+
 class Motor
 {
 private:
-    int step, dir, speed, steps;
+    int id, dirPin, stepPin, stepsToDo, stepsProcessed, stepBreak;
+
 public:
-    Motor(int step, int dir);
+    Motor(int id, int dirPin, int stepPin);
     ~Motor();
 
-    void setSpeed(int speed);
-    int getSpeed();
+    void setID(int id);
+    int getID();
 
-    void setSteps(int steps);
-    int getSteps();
+    void setDirPin(int dirPin);
+    int getDirPin();
 
-    int getStep();
-    int getDir();
+    void setStepPin(int stepPin);
+    int getStepPin();
+
+    void setStepsToDo(int steps);
+    int getStepsToDo();
+
+    void setStepsProcessed(int steps);
+    int getStepsProcessed();
+
+    void setStepBreak(int micosecs);
+    int getStepBreak();
+    
 };
 
 #endif
