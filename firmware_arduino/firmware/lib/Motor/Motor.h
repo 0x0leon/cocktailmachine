@@ -9,6 +9,7 @@ private:
     int id, dirPin, stepPin, stepsToDo, stepsProcessed, stepBreak;
 
 public:
+    Motor();
     Motor(int id, int dirPin, int stepPin);
     ~Motor();
 

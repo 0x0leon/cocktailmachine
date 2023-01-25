@@ -1,5 +1,8 @@
 #include "Motor.h"
 
+
+Motor::Motor(){}
+
 Motor::Motor(int id, int dirPin, int stepPin)
 {
     this->id = id;

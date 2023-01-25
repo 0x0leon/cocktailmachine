@@ -32,7 +32,9 @@ MotorController::~MotorController()
 ********************************************************************/
 void MotorController::parallelRun()
 {
-    // fine
+    /*
+    
+    */
     int maxStepsTodo = 0;
     for (auto i = 0; i < maxMotors; i++)
     {
@@ -46,10 +48,9 @@ void MotorController::parallelRun()
     int timer = 0;
     int x_mode = 1;
     bool run = true;
-    // laufe ueber anzahl der maximalen schritte
+
     while (run)
     {
-        // digital write high
         /*
             little state mashine for changing motor step high low 
 
@@ -61,7 +62,12 @@ void MotorController::parallelRun()
         case 1:
             for (auto i = 0; i < maxMotors; i++)
             {
-                if (timer % motoren[i].getStepBreak() == 0 && motoren[i].getStepsProcessed() <= motoren[i].getStepsProcessed())
+                if (motoren[i].getStepsProcessed() == maxStepsTodo)
+                {
+                    !run;
+                }
+                
+                else if (timer % motoren[i].getStepBreak() == 0 && motoren[i].getStepsProcessed() <= motoren[i].getStepsProcessed())
                 {
                     digitalWrite(motoren[i].getStepPin(), HIGH);
                 }
@@ -107,7 +113,7 @@ void MotorController::printMotors()
     for (auto i = 0; i < maxMotors; i++)
     {
         Serial.print("Motor ID: ");
-        Serial.print(this->motoren[i].getID(););
+        Serial.print(this->motoren[i].getID());
 
         Serial.print(" Direction Pin: ");
         Serial.print(this->motoren[i].getDirPin());
