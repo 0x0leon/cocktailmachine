@@ -29,6 +29,8 @@ public:
 
     void setStepBreak(int micosecs);
     int getStepBreak();
+
+    void addStep();
     
 };
 

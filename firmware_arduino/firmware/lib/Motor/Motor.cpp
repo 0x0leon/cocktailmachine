@@ -5,6 +5,8 @@ Motor::Motor(int id, int dirPin, int stepPin)
     this->id = id;
     this->dirPin=dirPin;
     this->stepPin=stepPin;
+
+    this->stepsProcessed = 0;
 }
 
 Motor::~Motor()
@@ -93,4 +95,11 @@ void Motor::setStepBreak(int micsec){
 ********************************************************************/
 int Motor::getStepBreak(){
     return this->stepBreak;
+}
+
+/********************************************************************
+*
+********************************************************************/
+void Motor::addStep(){
+    this->stepsProcessed += 1;
 }
