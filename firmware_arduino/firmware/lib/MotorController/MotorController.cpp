@@ -33,6 +33,8 @@ MotorController::~MotorController()
 void MotorController::parallelRun()
 {
     /*
+
+    try catch
     
     */
     int maxStepsTodo = 0;
@@ -53,9 +55,7 @@ void MotorController::parallelRun()
     {
         /*
             little state mashine for changing motor step high low 
-
             start ---> motor1 HIGH && mode = 2 ---> motor 1 LOW && mode = 2
-        
         */
         switch (x_mode)
         {
@@ -69,7 +69,8 @@ void MotorController::parallelRun()
                     !run;
                 }
                 
-                else if (timer % motoren[i].getStepBreak() == 0 && motoren[i].getStepsProcessed() <= motoren[i].getStepsProcessed())
+                else if (timer % motoren[i].getStepBreak() == 0 
+                    && motoren[i].getStepsProcessed() <= motoren[i].getStepsProcessed())
                 {
                     digitalWrite(motoren[i].getStepPin(), HIGH);
                 }
@@ -81,7 +82,8 @@ void MotorController::parallelRun()
         case 2:
             for (auto i = 0; i < maxMotors; i++)
             {
-                if (timer % motoren[i].getStepBreak() == 0 && motoren[i].getStepsProcessed() <= motoren[i].getStepsProcessed())
+                if (timer % motoren[i].getStepBreak() == 0 
+                    && motoren[i].getStepsProcessed() <= motoren[i].getStepsProcessed())
                 {
                     digitalWrite(motoren[i].getStepPin(), LOW);
 
@@ -101,9 +103,10 @@ void MotorController::parallelRun()
     }
 }
 
+
 /********************************************************************
  *
- ********************************************************************/
+ *******************************************************************/
 void MotorController::printMotors()
 {
 
@@ -124,3 +127,4 @@ void MotorController::printMotors()
     }
     Serial.println("<--------------->");
 }
+

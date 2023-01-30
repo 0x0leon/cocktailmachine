@@ -1,5 +1,7 @@
 #include <Arduino.h>
 #include "MotorTest.h"
+#include "MotorController.h"
+#include "SerialController.h"
 
 int ml100 = 8600;
 int ml200 = ml100 * 2;
@@ -18,6 +20,11 @@ int enable = 2;
 
 // int speed = 200;
 // int preRun = 1500;
+
+/********************************************************************
+ *
+ *******************************************************************/
+MotorController motorController = MotorController();
 
 void setup()
 {
@@ -43,6 +50,9 @@ void setup()
 }
 
 
+MotorController motorController;
+SerialController serialController;
+int commands[24];
 
 void loop()
 {
@@ -71,5 +81,31 @@ void loop()
 	// 	delay(3000);
 		
 	// }
+
+	/********************************************************************
+ 	*
+	 *******************************************************************/	
+
 	
+	
+	for (auto i = 0; i < 24; i++)
+	{
+		commands[i] = serialController.ProcessedInput[i];
+	}
+	
+
+	
+	
+	
+	// process command 
+	
+	/*
+	split command into half
+	loop over first half and split by space 
+
+	
+	*/
+
+
+
 }

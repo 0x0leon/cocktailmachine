@@ -14,8 +14,8 @@ public:
 
     
     void parallelRun();
-
     void printMotors();
+    String processInput();
 };
 
 
