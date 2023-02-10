@@ -10,10 +10,12 @@ void ParallelTest()
 
     // 548, 549
     int preSpeed = 700;
-    int speed = 170;
+
+    // hier kommt die geschwindigkeit rein
+    int speed = 200;
 
     // anfahren 530 + 10000 = 10530 
-    int schritte = 10000;
+    int schritte = 8500;
 
     int testSet[][4] = {
         {22, 1, 2000, 0},

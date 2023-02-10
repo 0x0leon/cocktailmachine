@@ -24,7 +24,6 @@ int enable = 2;
 /********************************************************************
  *
  *******************************************************************/
-MotorController motorController = MotorController();
 
 void setup()
 {
@@ -50,24 +49,19 @@ void setup()
 }
 
 
-MotorController motorController;
-SerialController serialController;
-int commands[24];
-
 void loop()
 {
-	digitalWrite(dir, LOW);
-	digitalWrite(dir2, LOW);
-	digitalWrite(dir3, LOW);
-	digitalWrite(dir4, LOW);
 
-	ParallelTest();
-	delay(2000);
-	// preLoop();
+	// bei falscher Richtung einfach alle 4 HIGH durch LOW ersetzen
 	digitalWrite(dir, HIGH);
 	digitalWrite(dir2, HIGH);
 	digitalWrite(dir3, HIGH);
 	digitalWrite(dir4, HIGH);
+
+	ParallelTest();
+	delay(2000);
+	// preLoop();
+
 
 	// while (true)
 	// {
@@ -84,17 +78,7 @@ void loop()
 
 	/********************************************************************
  	*
-	 *******************************************************************/	
-
-	
-	
-	for (auto i = 0; i < 24; i++)
-	{
-		commands[i] = serialController.ProcessedInput[i];
-	}
-	
-
-	
+	 *******************************************************************/
 	
 	
 	// process command 
